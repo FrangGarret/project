@@ -1,6 +1,9 @@
 <!--
  * @Author: 方家亮
 -->
+<!--
+ * @Author: 方家亮
+-->
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
@@ -16,6 +19,8 @@
         <timeline-item bg-color="#9dd8e0">item1</timeline-item>
         <timeline-item :hollow="true">item2</timeline-item>
       </timeline>
+
+      <div class="beiai"><a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">苏ICP备2021043782号-1</a></div>
   </div>
 </template>
 
@@ -41,5 +46,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.beiai{
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  line-height: 36px;
+  font-size: 24px;
+  text-align: center;
 }
 </style>
