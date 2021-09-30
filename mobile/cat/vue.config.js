@@ -4,6 +4,9 @@
 /*
  * @Author: 方家亮
  */
+/*
+ * @Author: 方家亮
+ */
 
 
 const path = require("path");
@@ -48,7 +51,7 @@ module.exports = {
   chainWebpack: (config) => {
     config.module
       .rule("images")
-      .test(/\.(jpg|png|gif)$/)
+      .test(/\.(jpg|png|gif|jpeg)$/)
       .use("url-loader")
       .loader("url-loader")
       .options({

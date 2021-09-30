@@ -1,3 +1,6 @@
+/*
+ * @Author: 方家亮
+ */
 import Vue from "vue";
 import VueRouter from "vue-router"
 Vue.use(VueRouter);
@@ -5,11 +8,11 @@ Vue.use(VueRouter);
 
 const routes = [
     {
-        path:"/index",
+        path:"/",
         name:"index",
-        component:()=>{
-           return import("../views/index")
-        }
+        component:()=>
+            import("../views/index")
+        
     }
 ]
 

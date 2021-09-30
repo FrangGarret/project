@@ -1,9 +1,10 @@
 
+
 <template>
   <div id="app">
 
      <router-view></router-view>
-      <!-- <div class="beiai"><a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">苏ICP备2021043782号-1</a></div> -->
+      <div class="beiai"><a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">苏ICP备2021043782号-1</a></div>
   </div>
 </template>
 
@@ -13,7 +14,6 @@ import { Timeline, TimelineItem, TimelineTitle } from 'vue-cute-timeline'
 export default {
   name: "App",
   components: {
-   
     Timeline,
     TimelineItem,
     TimelineTitle
@@ -28,7 +28,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 .beiai{
   position: fixed;
