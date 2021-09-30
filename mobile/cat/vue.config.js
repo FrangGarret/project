@@ -51,7 +51,7 @@ module.exports = {
   chainWebpack: (config) => {
     config.module
       .rule("images")
-      .test(/\.(jpg|png|gif|jpeg)$/)
+      .test(/\.(jpg|png|gif|jpeg|mp3)$/)
       .use("url-loader")
       .loader("url-loader")
       .options({
