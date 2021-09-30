@@ -4,25 +4,17 @@
 /*
  * @Author: 方家亮
  */
-/*
- * @Author: 方家亮
- */
-module.exports = {
-  publicPath: "./", //默认“./”,最好书写一下，程千你要记住！！！
 
-  pages: { //多页面配置的路径，不多解释，阿千你自己分析,只有多页面的时候才有记住啊！！！！！，单页面的时候是filenameHashing:true,同时好需要设置indexPath:"index.html",同时还需要保留src下的main.js和App.vue
-    index: {
-      // page 的入口
-      entry: 'src/main.js',
-      // 模板来源
-      template: 'public/index.html',
-      // 在 dist/index.html 的输出
-      filename: 'index.html',
-      // 当使用 title 选项时，
-      // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
-      title: 'Cat-In-Cat',
-    }
-  },
+
+const path = require("path");
+
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
+module.exports = {
+  indexPath: "index.html",
+  filenameHashing: true,
+  publicPath: "./", //默认“./”,最好书写一下，程千你要记住！！！
   assetsDir: "static", //放置静态资源的目录(js、css、img、font)
   outputDir: "../../pages/cat", //将构建好的文件输出到哪个文件夹
   lintOnSave: false, //这个是设置是否在保存时使用eslint检查，有效值：true|false|error，我很讨厌，所以不要，但是因为爱你，还是给你写上，阿千你要懂我！！！
@@ -46,11 +38,48 @@ module.exports = {
             // selectorBlackList: ['van-'], //要忽略并保留为px的选择器,我们一般不转换vantui中的大小
             // ignoreIdentifier: false,  //（boolean/string）忽略单个属性的方法，启用ignoreidentifier后，replace将自动设置为true。
             // replace: true, // （布尔值）替换包含REM的规则，而不是添加回退。
-            mediaQuery: true,  //（布尔值）允许在媒体查询中转换px。
-            minPixelValue: 3 //设置要替换的最小像素值(3px会被转rem)。 默认 0
+            mediaQuery: true, //（布尔值）允许在媒体查询中转换px。
+            minPixelValue: 1 //设置要替换的最小像素值(3px会被转rem)。 默认 0
           }),
         ]
       }
     }
+  },
+  chainWebpack: (config) => {
+    config.module
+      .rule("images")
+      .test(/\.(jpg|png|gif)$/)
+      .use("url-loader")
+      .loader("url-loader")
+      .options({
+        // 使文件大小小于此limit值(单位为byte)的文件转换为base64格式
+        // 大于此limit的, 会执行options中的fallback配置项插件, fallback默认值为file-loader,
+        // 而url-loader的options配置项也会被传递给file-loader
+        limit: 10000,
+        // 根据环境使用cdn或相对路径
+        publicPath: "",
+        //publicPath: process.env.NODE_ENV === 'production' ? 'http://parun.pingan.com/vitality/vitality/biz/shequ/' : '',
+        // 将图片打包到dist/img文件夹下, 不配置则打包到dist文件夹下
+        outputPath: "img",
+        // 配置打包后图片文件名
+        name: "[name].[hash:6].[ext]",
+      })
+      .end();
+
+    // 配置别名
+    config.resolve.alias
+      .set("@", resolve("src"))
+      .set("assets", resolve("src/assets"))
+      .set("components", resolve("src/components"))
+      .set("views", resolve("src/views"));
+
+    //将main.js中的ES6语法转换成ES5
+    config.entry.app = ["babel-polyfill", "./src/main.js"];
+
+    config.optimization.minimizer("terser").tap((args) => {
+      // 去除生产环境console
+      args[0].terserOptions.compress.drop_console = false;
+      return args;
+    });
   },
 };
