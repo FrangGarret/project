@@ -17,7 +17,11 @@ export default {
         require('../assets/img/cat/1.jpeg'),
         require('../assets/img/cat/2.jpeg'),
         require('../assets/img/cat/3.jpeg'),
-        require('../assets/img/cat/4.jpeg'),
+        require('../assets/img/cat/5.jpeg'),
+        require('../assets/img/cat/6.jpeg'),
+        require('../assets/img/cat/7.jpeg'),
+        require('../assets/img/cat/8.jpeg'),
+        require('../assets/img/cat/9.jpeg')
       ],
     };
   },
