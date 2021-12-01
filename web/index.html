@@ -26,6 +26,6 @@
     document.getElementById("shareBtn").onclick = function(){
         num++
         console.log("给小程序发送消息")
-        wx.miniProgram.postMessage({ data: {title: '我是想要分享的标题'} })
+        wx.miniProgram.postMessage({ data: {title: '我是想要分享的标题'+num} })
     }
 </script>
