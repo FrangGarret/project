@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #shareBtn{
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 32px;
+        }
+    </style>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+</head>
+<body>
+    <div id="shareBtn">
+        分享消息
+    </div>
+</body>
+</html>
+<script>
+    document.getElementById("shareBtn").onclick = function(){
+        console.log("给小程序发送消息")
+        wx.miniProgram.postMessage({ data: {title: '我是想要分享的标题'} })
+    }
+</script>
