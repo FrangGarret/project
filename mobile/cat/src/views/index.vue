@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import {sleep} from "../assets/js/common.js"
 export default {
   data() {
     return {
@@ -25,8 +26,9 @@ export default {
       ],
     };
   },
-  mounted() {
-    console.log(1);
+  async mounted() {
+    let res1 = await sleep()
+    console.log(res1)
   },
   methods:{
     viewBigImg(item){
