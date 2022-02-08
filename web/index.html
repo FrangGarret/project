@@ -1,3 +1,6 @@
+<!--
+ * @Author: 方家亮
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,5 +30,20 @@
         num++
         console.log("给小程序发送消息")
         wx.miniProgram.postMessage({ data: {title: '我是想要分享的标题'+num} })
+    }
+
+
+    var ua = navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i)=="micromessenger") {
+        //ios的ua中无miniProgram，但都有MicroMessenger（表示是微信浏览器）
+        wx.miniProgram.getEnv((res)=>{
+           if (res.miniprogram) {
+               alert("在小程序里");
+           } else {
+               alert("不在小程序里");
+           }
+        })
+    }else{
+        alert('不在微信里');
     }
 </script>
