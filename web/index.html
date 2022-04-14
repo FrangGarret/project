@@ -1,6 +1,9 @@
 <!--
  * @Author: 方家亮
 -->
+<!--
+ * @Author: 方家亮
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +34,7 @@
         console.log("给小程序发送消息")
         wx.miniProgram.postMessage({ data: {title: '我是想要分享的标题'+num} })
     }
-
+    console.log(window.wx)
 
     var ua = navigator.userAgent.toLowerCase();
     if(ua.match(/MicroMessenger/i)=="micromessenger") {
