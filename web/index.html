@@ -1,9 +1,4 @@
-<!--
- * @Author: 方家亮
--->
-<!--
- * @Author: 方家亮
--->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+  // VConsole will be exported to `window.VConsole` by default.
+  var vConsole = new window.VConsole();
+</script>
     <style>
         #shareBtn{
             height: 50px;
@@ -19,7 +20,7 @@
             font-size: 32px;
         }
     </style>
-    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
 </head>
 <body>
     <div id="shareBtn">
@@ -49,4 +50,33 @@
     }else{
         alert('不在微信里');
     }
+    wx.ready(function(){
+        console.log(window.WeixinJSBridge)
+        window.WeixinJSBridge.on('onPageStateChange', function(res) {
+            alert("我在前台出现了",res);
+        
+         })
+    // config信息验证后会执行 ready 方法，所有接口调用都必须在 config 接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在 ready 函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在 ready 函数中。
+    });
+
+
+    // document.addEventListener('WeixinJSBridgeReady', function(){
+    //     window.WeixinJSBridge.on('onPageStateChange', function(res) {
+    //         alert("我在前台出现了",res);
+        
+    //      })
+    // }, false);
+    if (typeof window.WeixinJSBridge == "undefined") {
+    $(document).on("WeixinJSBridgeReady", function() {
+        WeixinJSBridge.on('onPageStateChange', function(res) {
+            alert("我在前台出现了",res);
+        
+         })
+    });
+} else {
+   
+}
+  
+
+
 </script>
