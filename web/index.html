@@ -1,82 +1,83 @@
+<!--
+ * @Author: 方家亮
+-->
+<!--
+ * @Author: 方家亮
+-->
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
-  // VConsole will be exported to `window.VConsole` by default.
-  var vConsole = new window.VConsole();
-</script>
+    <script>
+      // VConsole will be exported to `window.VConsole` by default.
+      var vConsole = new window.VConsole();
+    </script>
     <style>
-        #shareBtn{
-            height: 50px;
-            line-height: 50px;
-            text-align: center;
-            font-size: 32px;
-        }
+      #shareBtn {
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 32px;
+      }
     </style>
-    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
-</head>
-<body>
-    <div id="shareBtn">
-        分享消息
-    </div>
-</body>
+    <script
+      type="text/javascript"
+      src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"
+    ></script>
+  </head>
+  <body>
+    <div id="shareBtn">分享消息</div>
+    <div class="jump">跳转其他页面</div>
+  </body>
 </html>
 <script>
-    let num = 1;
-    document.getElementById("shareBtn").onclick = function(){
-        num++
-        console.log("给小程序发送消息")
-        wx.miniProgram.postMessage({ data: {title: '我是想要分享的标题'+num} })
-    }
-    console.log(window.wx)
+  let num = 1;
+  document.getElementById("shareBtn").onclick = function () {
+    num++;
+    console.log("给小程序发送消息");
+    wx.miniProgram.postMessage({ data: { title: "我是想要分享的标题" + num } });
+  };
+  console.log(window.wx);
 
-    var ua = navigator.userAgent.toLowerCase();
-    if(ua.match(/MicroMessenger/i)=="micromessenger") {
-        //ios的ua中无miniProgram，但都有MicroMessenger（表示是微信浏览器）
-        wx.miniProgram.getEnv((res)=>{
-           if (res.miniprogram) {
-               alert("在小程序里");
-           } else {
-               alert("不在小程序里");
-           }
-        })
-    }else{
-        alert('不在微信里');
-    }
-    wx.ready(function(){
-        console.log(window.WeixinJSBridge)
-        window.WeixinJSBridge.on('onPageStateChange', function(res) {
-            alert("我在前台出现了",res);
-        
-         })
+  var ua = navigator.userAgent.toLowerCase();
+  if (ua.match(/MicroMessenger/i) == "micromessenger") {
+    //ios的ua中无miniProgram，但都有MicroMessenger（表示是微信浏览器）
+    wx.miniProgram.getEnv((res) => {
+      if (res.miniprogram) {
+        alert("在小程序里");
+      } else {
+        alert("不在小程序里");
+      }
+    });
+  } else {
+    alert("不在微信里");
+  }
+  wx.ready(function () {
+    console.log(window.WeixinJSBridge);
+    window.WeixinJSBridge.on("onPageStateChange", function (res) {
+      alert("我在前台出现了", res);
+    });
     // config信息验证后会执行 ready 方法，所有接口调用都必须在 config 接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在 ready 函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在 ready 函数中。
+  });
+
+  // document.addEventListener('WeixinJSBridgeReady', function(){
+  //     window.WeixinJSBridge.on('onPageStateChange', function(res) {
+  //         alert("我在前台出现了",res);
+
+  //      })
+  // }, false);
+  if (typeof window.WeixinJSBridge == "undefined") {
+    $(document).on("WeixinJSBridgeReady", function () {
+      WeixinJSBridge.on("onPageStateChange", function (res) {
+        alert("我在前台出现了", res);
+      });
     });
-
-
-    // document.addEventListener('WeixinJSBridgeReady', function(){
-    //     window.WeixinJSBridge.on('onPageStateChange', function(res) {
-    //         alert("我在前台出现了",res);
-        
-    //      })
-    // }, false);
-    if (typeof window.WeixinJSBridge == "undefined") {
-    $(document).on("WeixinJSBridgeReady", function() {
-        WeixinJSBridge.on('onPageStateChange', function(res) {
-            alert("我在前台出现了",res);
-        
-         })
-    });
-} else {
-   
-}
-  
-
-
+  } else {
+  }
 </script>
