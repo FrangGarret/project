@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // Set the name of the hidden property and the change event for visibility
+  var hidden, visibilityChange;
+  if (typeof document.hidden !== "undefined") {
+    // Opera 12.10 and Firefox 18 and later support hidden = "hidden";
+    visibilityChange = "visibilitychange";
+  } else if (typeof document.msHidden !== "undefined") {
+    hidden = "msHidden";
+    visibilityChange = "msvisibilitychange";
+  } else if (typeof document.webkitHidden !== "undefined") {
+    hidden = "webkitHidden";
+    visibilityChange = "webkitvisibilitychange";
+  }
+
+  function handleVisibilityChange() {
+    if (document.hidden) {
+      // 页面隐藏
+
+      console.log(document.hidden, document.visibilityState); // true 'hidden'
+    } else {
+      // 页面展示
+      alert("页面显示了");
+      console.log(document.hidden, document.visibilityState); // false 'visible'
+    }
+  }
+
+  // Warn if the browser doesn't support addEventListener or the Page Visibility API
+  if (
+    typeof document.addEventListener === "undefined" ||
+    hidden === undefined
+  ) {
+    console.log(
+      "浏览器不支持当前属性，请重新输入"
+    );
+  } else {
+    // Handle page visibility change
+    document.addEventListener(visibilityChange, handleVisibilityChange, false);
+  }
+</script>
